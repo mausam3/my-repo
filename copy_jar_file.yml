@@ -6,7 +6,7 @@
 
   vars:
     github_repo_url: "https://github.com/mausam3/my-repo.git"
-    jar_file_path: "/home/ansible/file*.jar"
+    jar_file_path: "copy_jar_file.yml"
 
   tasks:
     - name: Clone GitHub repository
