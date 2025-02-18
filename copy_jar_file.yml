@@ -1,0 +1,21 @@
+---
+- name: Copy jar file from GitHub to serveri
+  user: ansible
+  hosts: [demo]
+  gather_facts: false
+
+  vars:
+    github_repo_url: "https://github.com/mausam3/my-repo.git"
+    jar_file_path: "your_jar_file.jar"
+
+  tasks:
+    - name: Clone GitHub repository
+      git:
+        repo: "{{ github_repo_url }}"
+        dest: "/tmp/your_github_repo"
+        version: master
+
+    - name: Copy jar file to server
+      copy:
+        src: "/tmp/your_github_repo/{{ jar_file_path }}"
+        dest: "/home/your_username/{{ jar_file_path }}"
