@@ -1,0 +1,68 @@
+provider "google" {
+  credentials = file("mausam")
+  project     = "mausam-pandey"
+  region      = "us-central1"
+}
+
+resource "google_container_cluster" "my-cluster" {
+  name     = "my-gke-cluster"
+  location = "us-central1-c"
+
+  initial_node_count = 3
+
+  # Optional: Node pool configuration
+  node_config {
+    machine_type = "e2-medium"
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform",
+    ]
+  }
+
+  # Enable autoscaling for node pool
+  autoscaling {
+    min_node_count = 1
+    max_node_count = 5
+  }
+
+  # Enable network policies
+  network_policy {
+    enabled = true
+  }
+
+  # Optional: Set up logging and monitoring
+  addons_config {
+    monitoring {
+      enabled = true
+    }
+    logging {
+      enabled = true
+    }
+  }
+
+  # Enable IP aliasing (recommended for GKE)
+  ip_allocation_policy {
+    use_ip_aliases = true
+  }
+}
+
+# Configure Google Kubernetes Engine (GKE) authentication
+resource "google_container_cluster" "gke-cluster" {
+  name     = "gke-cluster"
+  location = "us-central1-c"
+
+  initial_node_count = 3
+
+  node_config {
+    machine_type = "e2-medium"
+    image_type   = "COS"
+    oauth_scopes = [
+      "https://www.googleapis.com/auth/cloud-platform"
+    ]
+  }
+}
+
+# Output the cluster name and kubeconfig
+output "kube_config" {
+  value = google_container_cluster.my-cluster.kube_config[0].raw_kube_config
+}
+
