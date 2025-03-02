@@ -18,25 +18,10 @@ resource "google_container_cluster" "my-cluster" {
     ]
   }
 
-  # Enable autoscaling for node pool
-  autoscaling {
-    min_node_count = 1
-    max_node_count = 5
-  }
 
   # Enable network policies
   network_policy {
     enabled = true
-  }
-
-  # Optional: Set up logging and monitoring
-  addons_config {
-    monitoring {
-      enabled = true
-    }
-    logging {
-      enabled = true
-    }
   }
 
   # Enable IP aliasing (recommended for GKE)
