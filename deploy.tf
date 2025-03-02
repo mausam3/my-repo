@@ -24,11 +24,6 @@ resource "google_container_cluster" "my-cluster" {
     enabled = true
   }
 
-  # Enable IP aliasing (recommended for GKE)
-  ip_allocation_policy {
-    use_ip_aliases = true
-  }
-}
 
 # Configure Google Kubernetes Engine (GKE) authentication
 resource "google_container_cluster" "gke-cluster" {
