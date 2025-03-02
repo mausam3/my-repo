@@ -1,8 +1,8 @@
-provider "google" {
-  project = "mausam-pandey"       # Replace with your GCP project ID
-  region  = "us-central1"           # Replace with your desired region
-  zone    = "us-central1-c"         # Replace with your desired zone
-}
+#provider "google" {
+#  project = "mausam-pandey"       # Replace with your GCP project ID
+#  region  = "us-central1"           # Replace with your desired region
+#  zone    = "us-central1-c"         # Replace with your desired zone
+#}
 
 resource "google_container_cluster" "my-cluster" {
   name     = "my-gke-cluster"
