@@ -1,7 +1,7 @@
 provider "google" {
-  credentials = file("mausam")
-  project     = "mausam-pandey"
-  region      = "us-central1"
+  project = "mausam-pandey"       # Replace with your GCP project ID
+  region  = "us-central1"           # Replace with your desired region
+  zone    = "us-central1-c"         # Replace with your desired zone
 }
 
 resource "google_container_cluster" "my-cluster" {
